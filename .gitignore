@@ -1,0 +1,7 @@
+Source/Core/CtrlrRevision.h
+Source/Misc/boost/**
+!Source/Misc/boost/boost.zip
+CMakeFiles
+CMakeCache.txt
+**/Builds
+**/Boost
