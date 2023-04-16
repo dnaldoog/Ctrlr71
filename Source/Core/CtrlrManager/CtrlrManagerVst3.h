@@ -1,109 +1,32 @@
-#include "stdafx.h"
-#include "CtrlrIDs.h"
-#include "CtrlrLog.h"
-#include "CtrlrManager.h"
+#pragma once
 
-CtrlrManagerVst3::CtrlrManagerVst3(CtrlrManager& _owner) : owner(_owner)
+#include <map>
+#include "CtrlrModulator/CtrlrModulator.h"
+class CtrlrManager;
+
+typedef std::pair<const int, CtrlrModulator*>					CtrlrVstPair;
+typedef std::multimap<const int, CtrlrModulator*>				CtrlrVstMap;
+typedef std::multimap<const int, CtrlrModulator*>::iterator		CtrlrVstMapIterator;
+
+class CtrlrManagerVst3
 {
-	_DBG("CtrlrManagerVst3::ctor");
-}
+public:
+	CtrlrManagerVst3(CtrlrManager& _owner);
+	~CtrlrManagerVst3();
+	void remove(CtrlrModulator* mod);
+	CtrlrModulator* get(const int idx);
+	int getFirstFree();
+	int size();
+	int getLargestIndex();
+	void set(CtrlrModulator* mod, const int idx = -1);
+	void dumpDebugData();
+	void removeIfAlreadyThere(CtrlrModulator* mod);
+	bool isAlreadyIndexed(CtrlrModulator* mod);
+	JUCE_LEAK_DETECTOR(CtrlrManagerVst3)
 
-CtrlrManagerVst3::~CtrlrManagerVst3()
-{
-	_DBG("CtrlrManagerVst3::dtor");
-}
+private:
+	Array<int> vstIndexes;
+	CtrlrManager& owner;
+	CtrlrVstMap map;
+};
 
-int CtrlrManagerVst3::size()
-{
-	return ((int)map.size());
-}
-
-void CtrlrManagerVst3::remove(CtrlrModulator* mod)
-{
-	removeIfAlreadyThere(mod);
-}
-
-void CtrlrManagerVst3::set(CtrlrModulator* mod, const int idx)
-{
-	if ((bool)mod->getProperty(Ids::modulatorVstExported) == false)
-	{
-		return;
-	}
-
-	if (isAlreadyIndexed(mod) && idx == -1)
-	{
-		return;
-	}
-
-	removeIfAlreadyThere(mod);
-	vstIndexes.addUsingDefaultSort(idx);
-	map.insert(CtrlrVstPair(idx, mod));
-}
-
-bool CtrlrManagerVst3::isAlreadyIndexed(CtrlrModulator* mod)
-{
-	for (CtrlrVstMapIterator it = map.begin(); it != map.end(); ++it)
-	{
-		if (it->second == mod)
-		{
-			return (true);
-		}
-	}
-	return (false);
-}
-
-void CtrlrManagerVst3::removeIfAlreadyThere(CtrlrModulator* mod)
-{
-	for (CtrlrVstMapIterator it = map.begin(); it != map.end(); ++it)
-	{
-		if (it->second == mod)
-		{
-			vstIndexes.removeFirstMatchingValue(it->first);
-			map.erase(it);
-			return;
-		}
-	}
-}
-
-CtrlrModulator* CtrlrManagerVst3::get(const int idx)
-{
-	CtrlrVstMapIterator it = map.find(idx);
-
-	if (it != map.end())
-	{
-		return (it->second);
-	}
-	else
-	{
-		return (nullptr);
-	}
-}
-
-int CtrlrManagerVst3::getFirstFree()
-{
-	/* kamder fix */
-	if (vstIndexes.size() == 0)
-		return (0);
-
-	return (vstIndexes.getLast() + 1);
-}
-
-int CtrlrManagerVst3::getLargestIndex()
-{
-	return (vstIndexes.getLast());
-}
-
-void CtrlrManagerVst3::dumpDebugData()
-{
-	_DBG("CtrlrManagerVst::dumpDebugData");
-
-	_DBG("---------- modulators by vst indexes ----------");
-
-	for (CtrlrVstMapIterator it = map.begin(); it != map.end(); ++it)
-	{
-		_DBG("[" + STR(it->first) + "]: " + it->second->getName());
-	}
-
-	_DBG("\t largest index " + STR(getLargestIndex()));
-	_DBG("---------- modulators by vst indexes ----------");
-}

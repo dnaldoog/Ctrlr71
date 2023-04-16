@@ -30,24 +30,3 @@ class CtrlrManagerVst
 		CtrlrVstMap map;
 };
 
-class CtrlrManagerVst3
-{
-public:
-	CtrlrManagerVst3(CtrlrManager& _owner);
-	~CtrlrManagerVst3();
-	void remove(CtrlrModulator* mod);
-	CtrlrModulator* get(const int idx);
-	int getFirstFree();
-	int size();
-	int getLargestIndex();
-	void set(CtrlrModulator* mod, const int idx = -1);
-	void dumpDebugData();
-	void removeIfAlreadyThere(CtrlrModulator* mod);
-	bool isAlreadyIndexed(CtrlrModulator* mod);
-	JUCE_LEAK_DETECTOR(CtrlrManagerVst)
-
-private:
-	Array<int> vstIndexes;
-	CtrlrManager& owner;
-	CtrlrVstMap map;
-};
