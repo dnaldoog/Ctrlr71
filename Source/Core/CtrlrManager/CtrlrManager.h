@@ -140,7 +140,7 @@ public:
 	*/
 	bool containsCtrlrComponent(CtrlrComponent* componentToLookFor);
 
-	/** Get a pointer to a Modulator using it's name.
+	/** Get a pointer to a Modulator using its name.
 
 		@param name							The name of the Modulator
 	*/
@@ -172,7 +172,7 @@ public:
 	*/
 	const String getUniquePanelName(const String& proposedName);
 
-	/** Get a pointer to a panel based on it's name
+	/** Get a pointer to a panel based on its name
 
 		@param panelName	the name of the panel to return, 0 if not found
 	*/
@@ -217,7 +217,7 @@ public:
 	*/
 	int getNumModulators(const bool onlyVstParameters);
 
-	/** Return modulator based on it's vstIndex
+	/** Return modulator based on its vstIndex
 
 	*/
 	CtrlrModulator* getModulatorByVstIndex(const int index);
