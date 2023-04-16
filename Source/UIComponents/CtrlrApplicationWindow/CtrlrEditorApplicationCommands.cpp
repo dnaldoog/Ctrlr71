@@ -318,12 +318,12 @@ void CtrlrEditor::getCommandInfo (CommandID commandID, ApplicationCommandInfo &r
 			break;
 
 		case doExportFileInstance:
-			result.setInfo ("Export VST3/Standalone", "Exports the panel as a standalone instance (executable/loadable file)", panelCategory, 0);
+			result.setInfo ("Export VST3", "Exports the panel as a VST3 plugin", panelCategory, 0);
 			result.setActive (isPanelActive(true));
 			break;
 
 		case doExportFileInstanceRestricted:
-			result.setInfo ("Export VST3/Standalone Restricted", "Exports the panel as a standalone restricted instance (executable/loadable file). Non editable by user.", panelCategory, 0);
+			result.setInfo ("Export VST3 Restricted", "Exports the panel as a standalone restricted vst3 plugin. Non editable by user.", panelCategory, 0);
 			result.setActive (isPanelActive(true));
 			break;
 
