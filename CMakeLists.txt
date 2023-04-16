@@ -156,6 +156,7 @@ target_sources(ctrlr
 	Source/Core/CtrlrManager/CtrlrManager.cpp
 	Source/Core/CtrlrManager/CtrlrManagerInstance.cpp
 	Source/Core/CtrlrManager/CtrlrManagerVst.cpp
+	Source/Core/CtrlrManager/CtrlrManagerVst3.cpp	
 	Source/Core/CtrlrModulator/CtrlrModulator.cpp
 	Source/Core/CtrlrModulator/CtrlrModulatorProcessor.cpp
 	Source/Core/CtrlrPanel/CtrlrEvaluationScopes.cpp
