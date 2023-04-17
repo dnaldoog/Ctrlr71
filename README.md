@@ -1,4 +1,4 @@
-<!--
+
 Ctrlr
 =====
 
@@ -84,11 +84,12 @@ Open the corresponding Xcode project in Builds/Generated/Mac, after that just bu
 errors you are on your own, the amount of changes between Xcode versions and OSX versions is impossible
 for me to track, you can post an issue and i'll try to solve it.
 
-----
--->
+
+<!--
 To build on C++17 with latest version of JUCE<br>
 Project > Properties > C/C++ > Preprocessor > Preprocessor Definitions and add _HAS_AUTO_PTR_ETC=1<br>
 <br>
 In JuceLibraryCode/AppConfig.h add the following line:<br>
 #define JUCE_MODAL_LOOPS_PERMITTED  1<br>
 #define JUCE_GLOBAL_MODULE_SETTINGS_INCLUDED 1<br>
+-->
